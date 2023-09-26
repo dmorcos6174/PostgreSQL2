@@ -1,70 +1,69 @@
-package hibernate.DAO;
+package hibernate.services;
 
-import hibernate.DTO.InstructorHib;
+import hibernate.entities.Course;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import postgresql.DTO.Instructor;
 
 import java.util.List;
 import java.util.UUID;
 
-public class InstructorDAOHib {
+public class CourseService {
     private final SessionFactory sessionFactory;
 
-    public InstructorDAOHib(SessionFactory sessionFactory) {
+    public CourseService(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public List<InstructorHib> findAll() {
+    public List<Course> findAll() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        List<InstructorHib> instructors = session.createQuery("FROM InstructorHib", InstructorHib.class).list();
+        List<Course> courses = session.createQuery("FROM Course", Course.class).list();
 
         transaction.commit();
         session.close();
 
-        return instructors;
+        return courses;
     }
 
-    public InstructorHib findById(UUID id) {
+    public Course findById(UUID id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        InstructorHib instructor = session.get(InstructorHib.class, id);
+        Course course = session.get(Course.class, id);
 
         transaction.commit();
         session.close();
 
-        return instructor;
+        return course;
     }
 
-    public void save(InstructorHib instructor) {
+    public void save(Course course) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.save(instructor);
-
-        transaction.commit();
-        session.close();
-    }
-
-    public void update(InstructorHib instructor) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
-        session.update(instructor);
+        session.save(course);
 
         transaction.commit();
         session.close();
     }
 
-    public void delete(InstructorHib instructor) {
+    public void update(Course course) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.delete(instructor);
+        session.update(course);
+
+        transaction.commit();
+        session.close();
+    }
+
+    public void delete(Course course) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.delete(course);
 
         transaction.commit();
         session.close();

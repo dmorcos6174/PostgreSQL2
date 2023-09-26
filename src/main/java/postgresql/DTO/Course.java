@@ -1,5 +1,7 @@
 package postgresql.DTO;
 
+import enums.CourseLevel;
+
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -9,11 +11,11 @@ public class Course {
     private String name;
     private Timestamp startDate;
     private Timestamp endDate;
-    private COURSE_LEVEL courseLevel;
+    private CourseLevel courseLevel;
     private boolean isStarted;
     private UUID instructorId;
 
-    public Course(UUID id, String name, Timestamp startDate, Timestamp endDate, COURSE_LEVEL courseLevel, boolean isStarted, UUID instructorId) {
+    public Course(UUID id, String name, Timestamp startDate, Timestamp endDate, CourseLevel courseLevel, boolean isStarted, UUID instructorId) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -55,11 +57,11 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public COURSE_LEVEL getCourseLevel() {
+    public CourseLevel getCourseLevel() {
         return courseLevel;
     }
 
-    public void setCourseLevel(COURSE_LEVEL courseLevel) {
+    public void setCourseLevel(CourseLevel courseLevel) {
         this.courseLevel = courseLevel;
     }
 

@@ -1,14 +1,15 @@
-package hibernate.DTO;
+package hibernate.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "instructor")
-public class InstructorHib {
+public class Instructor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
     @Column(name = "first_name", nullable = false)
@@ -17,10 +18,27 @@ public class InstructorHib {
     private String lastName;
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "email", nullable = false)
+    @Column(name = "phone_num", nullable = false)
     private String phoneNum;
 
-    public InstructorHib(UUID id, String firstName, String lastName, String email, String phoneNum) {
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Course> courses;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "instructor_details_id", referencedColumnName = "id")
+    private InstructorDetails instructorDetails;
+
+    public InstructorDetails getInstructorDetails() {
+        return instructorDetails;
+    }
+
+    public void setInstructorDetails(InstructorDetails instructorDetails) {
+        this.instructorDetails = instructorDetails;
+    }
+
+    public Instructor() {}
+
+    public Instructor(UUID id, String firstName, String lastName, String email, String phoneNum) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,8 +46,12 @@ public class InstructorHib {
         this.phoneNum = phoneNum;
     }
 
-    public InstructorHib() {
+    public List<Course> getCourses() {
+        return courses;
+    }
 
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     public UUID getId() {
@@ -74,7 +96,7 @@ public class InstructorHib {
 
     @Override
     public String toString() {
-        return "------------DTO.Instructor------------" + '\n' +
+        return "------------Instructor------------" + '\n' +
                 "id=" + id + '\n' +
                 "firstName=" + firstName + '\n' +
                 "lastName=" + lastName + '\n' +

@@ -1,6 +1,6 @@
 package postgresql.DAO;
 
-import postgresql.DTO.GENDER;
+import enums.Gender;
 import postgresql.DTO.Student;
 
 import javax.sql.DataSource;
@@ -86,7 +86,7 @@ public class StudentDAO extends BaseDAO<Student> {
         String firstName = resultSet.getString("first_name");
         String lastName = resultSet.getString("last_name");
         Integer age = resultSet.getInt("age");
-        GENDER gender = GENDER.valueOf(resultSet.getString("gender"));
+        Gender gender = Gender.valueOf(resultSet.getString("gender"));
         String email = resultSet.getString("email");
         String phoneNum = resultSet.getString("phone_num");
         Long natId = resultSet.getLong("nat_id");

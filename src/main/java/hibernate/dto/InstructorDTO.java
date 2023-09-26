@@ -1,28 +1,31 @@
-package postgresql.DTO;
+package hibernate.dto;
 
-import enums.Gender;
+import hibernate.entities.Course;
+import hibernate.entities.InstructorDetails;
 
+import java.util.List;
 import java.util.UUID;
 
-public class Student {
+public class InstructorDTO {
+
     private UUID id;
     private String firstName;
     private String lastName;
-    private Integer age;
-    private Gender gender;
     private String email;
     private String phoneNum;
-    private Long natId;
+    private List<Course> courses;
+    private InstructorDetails instructorDetails;
 
-    public Student(UUID id, String firstName, String lastName, Integer age, Gender gender, String email, String phoneNum, Long natId) {
+    public InstructorDTO() {}
+
+    public InstructorDTO(UUID id, String firstName, String lastName, String email, String phoneNum, List<Course> courses, InstructorDetails instructorDetails) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
-        this.gender = gender;
         this.email = email;
         this.phoneNum = phoneNum;
-        this.natId = natId;
+        this.courses = courses;
+        this.instructorDetails = instructorDetails;
     }
 
     public UUID getId() {
@@ -49,22 +52,6 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -81,25 +68,30 @@ public class Student {
         this.phoneNum = phoneNum;
     }
 
-    public Long getNatId() {
-        return natId;
+    public List<Course> getCourses() {
+        return courses;
     }
 
-    public void setNatId(Long natId) {
-        this.natId = natId;
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public InstructorDetails getInstructorDetails() {
+        return instructorDetails;
+    }
+
+    public void setInstructorDetails(InstructorDetails instructorDetails) {
+        this.instructorDetails = instructorDetails;
     }
 
     @Override
     public String toString() {
-        return "------------DTO.Student------------" + '\n' +
+        return "------------Instructor------------" + '\n' +
                 "id=" + id + '\n' +
                 "firstName=" + firstName + '\n' +
                 "lastName=" + lastName + '\n' +
-                "age=" + age + '\n' +
-                "gender=" + gender + '\n' +
                 "email=" + email + '\n' +
                 "phoneNum=" + phoneNum + '\n' +
-                "natId=" + natId + '\n' +
                 "------------------------";
     }
 }

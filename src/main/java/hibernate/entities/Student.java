@@ -1,18 +1,46 @@
-package postgresql.DTO;
+package hibernate.entities;
 
 import enums.Gender;
+import jakarta.persistence.*;
 
+import java.util.Set;
 import java.util.UUID;
 
+@Entity
+@Table(name = "student")
 public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "age")
     private Integer age;
+
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "phone_num")
     private String phoneNum;
+
+    @Column(name = "nat_id")
     private Long natId;
+
+    @ManyToMany
+    @JoinTable(name = "student_course",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "enrolled_course")})
+    private Set<Course> courses;
 
     public Student(UUID id, String firstName, String lastName, Integer age, Gender gender, String email, String phoneNum, Long natId) {
         this.id = id;
@@ -25,12 +53,22 @@ public class Student {
         this.natId = natId;
     }
 
+    public Student() {}
+
     public UUID getId() {
         return id;
     }
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 
     public String getFirstName() {
@@ -91,7 +129,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "------------DTO.Student------------" + '\n' +
+        return "------------Student------------" + '\n' +
                 "id=" + id + '\n' +
                 "firstName=" + firstName + '\n' +
                 "lastName=" + lastName + '\n' +

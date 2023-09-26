@@ -1,6 +1,6 @@
 package postgresql.DAO;
 
-import postgresql.DTO.COURSE_LEVEL;
+import enums.CourseLevel;
 import postgresql.DTO.Course;
 import postgresql.DTO.CourseStudent;
 
@@ -81,7 +81,7 @@ public class CourseDAO extends BaseDAO<Course>{
         String name = resultSet.getString("name");
         Timestamp startDate = resultSet.getTimestamp("start_date");
         Timestamp endDate = resultSet.getTimestamp("end_date");
-        COURSE_LEVEL courseLevel = COURSE_LEVEL.valueOf(resultSet.getString("course_level"));
+        CourseLevel courseLevel = CourseLevel.valueOf(resultSet.getString("course_level"));
         boolean isStarted = resultSet.getBoolean("is_started");
         UUID instructorId = (UUID) resultSet.getObject("instructor_id");
 

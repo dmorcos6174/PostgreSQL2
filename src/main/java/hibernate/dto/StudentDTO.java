@@ -1,10 +1,12 @@
-package postgresql.DTO;
+package hibernate.dto;
 
 import enums.Gender;
+import hibernate.entities.Course;
 
+import java.util.Set;
 import java.util.UUID;
 
-public class Student {
+public class StudentDTO {
     private UUID id;
     private String firstName;
     private String lastName;
@@ -13,8 +15,11 @@ public class Student {
     private String email;
     private String phoneNum;
     private Long natId;
+    private Set<Course> courses;
 
-    public Student(UUID id, String firstName, String lastName, Integer age, Gender gender, String email, String phoneNum, Long natId) {
+    public StudentDTO() {}
+
+    public StudentDTO(UUID id, String firstName, String lastName, Integer age, Gender gender, String email, String phoneNum, Long natId, Set<Course> courses) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,6 +28,7 @@ public class Student {
         this.email = email;
         this.phoneNum = phoneNum;
         this.natId = natId;
+        this.courses = courses;
     }
 
     public UUID getId() {
@@ -89,9 +95,17 @@ public class Student {
         this.natId = natId;
     }
 
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
+
     @Override
     public String toString() {
-        return "------------DTO.Student------------" + '\n' +
+        return "------------Student------------" + '\n' +
                 "id=" + id + '\n' +
                 "firstName=" + firstName + '\n' +
                 "lastName=" + lastName + '\n' +
