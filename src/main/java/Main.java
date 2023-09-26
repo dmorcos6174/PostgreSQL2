@@ -13,6 +13,8 @@ import enums.*;
 import postgresql.DAO.*;
 import postgresql.DTO.*;
 
+import static hibernate.JoinsWithHib.*;
+
 public class Main {
     public static void testInstructorHib() {
         // Create an InstructorDao object
@@ -28,7 +30,7 @@ public class Main {
         Instructor instructorById = instructorService.findById(instructor.getId());
 
         // Print the instructor to the console
-        System.out.println("New Sample Instructor");
+        System.out.println("New Instructor Found By ID:");
         System.out.println(instructorById);
 
         List<Instructor> instructors = instructorService.findAll();
@@ -58,7 +60,7 @@ public class Main {
 
         Course courseById = courseService.findById(course.getId());
 
-        System.out.println("New Sample Course");
+        System.out.println("New Course Found By ID:");
         System.out.println(courseById);
 
         List<Course> courses = courseService.findAll();
@@ -75,18 +77,26 @@ public class Main {
         CourseService courseService = new CourseService(HibernateUtil.getSessionFactory());
 
         Course courseById = courseService.findById(UUID.fromString("7c8d9e0f-3a4b-5c6d-7e8f-9a0b1c2d3e4f"));
+        System.out.println("Course Name: " + courseById.getName());
 
         Set<Student> students = courseById.getStudents();
-
+        System.out.println("Enrolled Students:");
         for (Student student : students) {
-            System.out.println(student);
+            System.out.println(student.getFirstName() + " " + student.getLastName());
         }
     }
 
     public static void main(String[] args) {
 
-        testInstructorHib();
-//        testCourseHib();
+//        testInstructorHib(); // WORKS
+//        testCourseHib(); // DOESNT
+//        testStudentsFieldCourseHib(); // FIXED
+
+//        getInstructorNameAndCourses();
+//        getInstructorNamesAndStudents();
+//        getCourseInfoAndStudents();
+        getStudentNamesInMiddleCourses();
+
         // Close Session Factory
         HibernateUtil.closeSessionFactory();
     }

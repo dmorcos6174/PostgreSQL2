@@ -21,7 +21,7 @@ public class Instructor {
     @Column(name = "phone_num", nullable = false)
     private String phoneNum;
 
-    @OneToMany(mappedBy = "instructor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Course> courses;
 
     @OneToOne(cascade = CascadeType.ALL)

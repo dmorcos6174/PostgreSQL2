@@ -36,7 +36,7 @@ public class Course {
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "student_course",
             joinColumns = @JoinColumn(name = "enrolled_course"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
