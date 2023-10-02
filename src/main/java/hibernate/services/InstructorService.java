@@ -57,7 +57,7 @@ public class InstructorService {
 
         Instructor instructor = session.get(Instructor.class, id);
 
-        transaction.commit();
+//        transaction.commit();
         session.close();
 
         return instructor;

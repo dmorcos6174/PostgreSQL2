@@ -1,3 +1,4 @@
+import hibernate.JoinsWithHQL;
 import hibernate.services.CourseService;
 import hibernate.services.InstructorService;
 import hibernate.entities.Course;
@@ -5,15 +6,10 @@ import hibernate.entities.Instructor;
 import hibernate.entities.Student;
 import hibernate.HibernateUtil;
 
-import javax.sql.DataSource;
 import java.sql.Timestamp;
 import java.util.*;
 
 import enums.*;
-import postgresql.DAO.*;
-import postgresql.DTO.*;
-
-import static hibernate.JoinsWithHib.*;
 
 public class Main {
     public static void testInstructorHib() {
@@ -95,7 +91,12 @@ public class Main {
 //        getInstructorNameAndCourses();
 //        getInstructorNamesAndStudents();
 //        getCourseInfoAndStudents();
-        getStudentNamesInMiddleCourses();
+//        getStudentNamesInMiddleCourses();
+
+//        JoinsWithHQL.getInstructorNamesAndCourses();
+//        JoinsWithHQL.getInstructorNamesAndStudents();
+//        JoinsWithHQL.getCourseNameStartDateAndStudents();
+        JoinsWithHQL.getStudentsInMiddleLevel("Middle");
 
         // Close Session Factory
         HibernateUtil.closeSessionFactory();
